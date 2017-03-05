@@ -1,0 +1,7 @@
+- name: Webapp Installation
+  hosts: all
+  sudo: yes
+
+  roles:
+    - webapp
+    - nginx

@@ -1,0 +1,12 @@
+---
+- name: copy nginx conf into a new vhost
+  copy:
+    src: fw.conf
+    dest: /etc/nginx/sites-available/fw.conf
+
+- name: symlink for site enable on debian nginx
+  file:
+    src: /etc/nginx/sites-available/fw.conf
+    dest: /etc/nginx/sites-enabled/fw
+    state: link
+    notify: restart nginx

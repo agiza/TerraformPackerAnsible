@@ -1,0 +1,24 @@
+---
+- name: Create the project directory.
+  file:
+  state: directory
+  path: /srv/webapp/notejam
+
+- name: clone git repo
+  git:
+  repo: https://github.com/komarserjio/notejam.git
+  dest: /srv/webapp/notejam
+
+- name: install webapp dependencies
+  npm:
+    path: /srv/webapp/notejam
+
+- name: create app db
+  shell: node db.js
+  args:
+    chdir: /srv/webapp/notejam/
+
+- name: Launch app in port 3000
+  shell: DEBUG=* ./bin/www
+  args:
+    chdir: /srv/webapp/notejam/
